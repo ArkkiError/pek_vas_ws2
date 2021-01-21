@@ -36,8 +36,6 @@ def callback(data):
     velocity_publisher.publish(vel_msg)
     print(pose.theta)
 
-    #VITTUSAATANANAPASKDLKASBJAGÖJASGJKÖJSGD 
-
 
 rospy.init_node('turtlebot_auto', anonymous=True)
 velocity_publisher = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
