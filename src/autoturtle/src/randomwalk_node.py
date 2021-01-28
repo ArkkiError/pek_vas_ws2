@@ -12,18 +12,22 @@ def callback(data):
     if pose.x > 10:
         vel_msg.angular.z = -5
         vel_msg.linear.x = 3
+        print("Wall")
 
     elif pose.x < 1:
         vel_msg.angular.z = -5
         vel_msg.linear.x = 2
+        print("Wall")
 
     elif pose.y > 10:
         vel_msg.angular.z = -5
         vel_msg.linear.x = 3
+        print("Wall")
 
     elif pose.y < 1:
         vel_msg.angular.z = -5
         vel_msg.linear.x = 2
+        print("Wall")
 
     else:
         # vel_msg.angular.z = 5
