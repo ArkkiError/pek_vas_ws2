@@ -110,6 +110,7 @@
                 <odometryFrame>odom</odometryFrame>
                 <robotBaseFrame>link_chassis</robotBaseFrame>
             </plugin>
+        </gazebo>
     </robot>
 
 
