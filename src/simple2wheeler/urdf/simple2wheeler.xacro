@@ -128,11 +128,57 @@
                     <alwaysOn>true</alwaysOn>
                     <updateRate>30.0</updateRate>
                     <cameraName>/camera</cameraName>
-                    <CameraTopicName>image_raw</CameraTopicName>
+                    <imageTopicName>image_raw</imageTopicName>
+                    <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                    <frameName>camera_link</frameName>
+                    <hackBaseLine>0.07</hackBaseLine>
+                    <distortionK1>0</distortionK1>
+                    <distortionK2>0</distortionK2>
+                    <distortionK3>0</distortionK3>
+                    <distortionT1>0</distortionT1>
+                    <distortionT2>0</distortionT2>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+        <link name="imu_link">	
+            <collision>	
+            </collision>	
+            <visual>	
+            </visual>	
+        </link>
+
+        <joint name="imu_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.07"/>
+            <child link="imu_link"/>
+            <parent link="link_chassis"/>
+        </joint>
+
+        <gazebo reference="imu_link">
+            <gravity>true</gravity>
+            <sensor name="imu_sensor" type="imu">
+                <alwaysOn>true</alwaysOn>
+                <update_rate>10</update_rate>
+                <visualize>true</visualize>
+                <topic>_default_topic_</topic>
+                <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                    <topicName>imu</topicName>
+                    <bodyName>imu_link</bodyName>
+                    <updateRateHZ>10</updateRateHZ>
+                    <gaussianNoise>0.0</gaussianNoise>
+                    <xyzOffset>0 0 0 </xyzOffset>
+                    <rpyOffset>0 0 0 </rpyOffset>
+                    <frameName>imu_link</frameName>
+                    <inertialOrientationAsReference>false</inertialOrientationAsReference>
+                </plugin>
+                <pose> 0 0 0 0 0 0 </pose>
+            </sensor>
+        </gazebo>
+
 
         <gazebo>
             <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
-                <lecacyMode>false</lecacyMode>
+                <legacyMode>false</legacyMode>
                 <alwaysOn>true</alwaysOn>
                 <updateRate>20</updateRate>
                 <leftJoint>joint_left_wheel</leftJoint>
