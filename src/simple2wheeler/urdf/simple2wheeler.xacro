@@ -215,7 +215,7 @@
         <joint name="lidar_joint" type="fixed">
             <parent link="link_chassis" />
             <child link="lidar_link" />
-            <origin rpy="0 0 0" xyz="0 0 0.17" />
+            <origin rpy="0 0 0" xyz="0 0 0.07" />
         </joint>
         <gazebo reference="lidar_link">
             <sensor type="ray" name="lidar">
