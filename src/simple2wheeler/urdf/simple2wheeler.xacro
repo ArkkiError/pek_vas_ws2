@@ -192,6 +192,61 @@
                 <robotBaseFrame>link_chassis</robotBaseFrame>
             </plugin>
         </gazebo>
+
+        <link name="lidar_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://simple2wheeler/meshes/rplidar_a2_simple.stl" />
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://simple2wheeler/meshes/rplidar_a2_simple.stl" />
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.125"/>
+                <origin xyz="0 0 -0.026" />
+                <inertia ixx="0.000144185" ixy="0.0" ixz="0.0" 
+                    iyy="0.00144185" iyz="0.0"
+                    izz="0.00144185" />
+            </inertial>
+        </link>
+        <joint name="lidar_joint" type="fixed">
+            <parent link="link_chassis" />
+            <child link="lidar_link" />
+            <origin rpy="0 0 0" xyz="0 0 0.17" />
+        </joint>
+        <gazebo reference="lidar_link">
+            <sensor type="ray" name="lidar">
+                <alwaysOn>true</alwaysOn>
+                <update_rate>10</update_rate>
+                <pose> 0 0 0 0 0 0 </pose>
+                <visualize>true</visualize>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>400</samples>
+                            <resolution>0.9</resolution>
+                            <min_angle>-3.142</min_angle>
+                            <max_angle>3.142</max_angle>
+                        </horizontal>
+                    </scan>
+                    <range>
+                        <min>0.15</min>
+                        <max>6</max>
+                        <resolution>0.01</resolution>
+                    </range>
+                </ray>
+                <plugin name="gazebo_ros_lidar_controller" filename="libgazebo_ros_laser.so">
+                    <gaussianNoise>0.005</gaussianNoise>
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>10</updateRate>
+                    <topicName>lidar</topicName> <!--/lidar should work also-->
+                    <frameName>lidar_link</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
     </robot>
 
 
